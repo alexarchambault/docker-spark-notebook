@@ -80,7 +80,7 @@ RUN apt-prepare \
  && pip3 install -r requirements.txt -e . \
  && python3 -m ipykernel.kernelspec \
  && echo "Installing openBLAS ..." \
- && cd /tmp \
+ && cd /opt \
  && git clone -q --branch=master git://github.com/xianyi/OpenBLAS.git \
  && cd OpenBLAS/ \
  && git checkout tags/v${OPENBLAS_VERSION} \
@@ -88,18 +88,18 @@ RUN apt-prepare \
  && make install \
  && export LD_LIBRARY_PATH=/opt/OpenBLAS/lib/ \
  && echo "Installing numpy ..." \
- && cd /tmp \
+ && cd /opt \
  && git clone -q --branch=master git://github.com/numpy/numpy.git \
  && cd numpy \
  && git checkout tags/v${PYTHON_NUMPY_VERSION} \
- && cp /src/config/numpy-site.cfg /tmp/numpy/site.cfg \
+ && cp /src/config/numpy-site.cfg /opt/numpy/site.cfg \
  && python3 setup.py install \
  && echo "Installing scipy ..." \
- && cd /tmp \
+ && cd /opt \
  && git clone -q --branch=master git://github.com/scipy/scipy.git \
  && cd scipy \
  && git checkout tags/v${PYTHON_SCIPY_VERSION} \
- && cp /src/config/scipy-site.cfg /tmp/scipy/site.cfg \
+ && cp /src/config/scipy-site.cfg /opt/scipy/site.cfg \
  && ldconfig && export LD_LIBRARY_PATH=/opt/OpenBLAS/lib/ \
  && python3 setup.py install \
  && echo "Installing additional python packages ..." \
@@ -130,20 +130,10 @@ RUN apt-prepare \
  && echo "Installing pySpark Jupyter kernel ..." \
  && mkdir -p /usr/local/share/jupyter/kernels/pyspark/ \
  && cp -r /src/config/pyspark_kernel/* /usr/local/share/jupyter/kernels/pyspark/ \
+ && echo "Installing the bootstrap script ..." \
+ && mv /bin/bootstrap /bin/bootstrap-spark \
  && echo "Cleaning up ..." \
- && rm -rf /tmp/* \
- && apt-get remove -y --purge \
-      libxml2-dev \
-      libpq-dev \
-      libssl-dev \
-      zlib1g-dev \
-      libsqlite3-dev \
-      libcurl4-openssl-dev \
-      libfreetype6-dev \
-      libhdf5-dev \
-      libpng-dev \
- && apt-cleanup \
- && mv /bin/bootstrap /bin/bootstrap-spark
+ && apt-cleanup
 
 # Add the binary files
 ADD bin /bin/
