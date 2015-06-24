@@ -94,7 +94,7 @@ RUN apt-prepare \
  && git checkout tags/v${PYTHON_NUMPY_VERSION} \
  && cp /src/config/numpy-site.cfg /tmp/numpy/site.cfg \
  && python3 setup.py install \
- && "Installing scipy ..." \
+ && echo "Installing scipy ..." \
  && cd /tmp \
  && git clone -q --branch=master git://github.com/scipy/scipy.git \
  && cd scipy \
