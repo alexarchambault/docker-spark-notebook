@@ -30,6 +30,7 @@ env |  awk '{split($0,a,"\n"); print "export " a[1]}' > /etc/environment
 echo "export PATH=$PATH" >> /etc/environment
 
 if [[ $1 == "-d" ]]; then
+  cd ${NOTEBOOKS_DIR}
   jupyter notebook --ip=0.0.0.0 --no-browser --port=8888 --notebook-dir=${NOTEBOOKS_DIR}
 fi
 

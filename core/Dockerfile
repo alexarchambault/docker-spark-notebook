@@ -135,7 +135,6 @@ RUN apt-prepare \
       libssl-dev \
       zlib1g-dev \
       libsqlite3-dev \
-      libzmq3-dev \
       libcurl4-openssl-dev \
       libfreetype6-dev \
       libhdf5-dev \
@@ -145,6 +144,10 @@ RUN apt-prepare \
 
 # Add the binary files
 ADD bin /bin/
+
+# Define the mountable notebooks directory
+VOLUME \
+  ["/notebooks"]
 
 # expose the relevant ports
 EXPOSE \
