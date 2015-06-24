@@ -16,6 +16,8 @@ PYSPARK_EXECUTOR_MEMORY=${PYSPARK_EXECUTOR_MEMORY:-1g}
 PYSPARK_EXECUTOR_CORES=${PYSPARK_EXECUTOR_CORES:-1}
 
 # Configure the pySpark kernel.json
+mkdir -p /usr/local/share/jupyter/kernels/pyspark/
+touch /usr/local/share/jupyter/kernels/pyspark/kernel.json
 cat /src/config/kernels/pyspark/kernel.json.template \
   | sed "s|{{PYSPARK_DRIVER_MEMORY}}|${PYSPARK_DRIVER_MEMORY}|g" \
   | sed "s|{{PYSPARK_EXECUTOR_MEMORY}}|${PYSPARK_EXECUTOR_MEMORY}|g" \

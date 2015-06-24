@@ -1,5 +1,5 @@
 ########################################################################
-# Dockerfile for Jupyter notebooks with python3 & pySpark
+# Dockerfile for Jupyter notebooks with python, pySpark & R support
 #
 #                    ##        .
 #              ## ## ##       ==
@@ -10,9 +10,9 @@
 #         \    \        __/
 #          \____\______/
 #
-# Component:    Jupyter notebooks with python3 & pySpark
+# Component:    spark-notebook
 # Author:       pjan vandaele <pjan@pjan.io>
-# Scm url:      https://github.com/docxs/docker-spark-notebook
+# Scm url:      https://github.com/docxs/docker-cassandra
 # License:      MIT
 ########################################################################
 
@@ -128,6 +128,7 @@ RUN apt-prepare \
       texlive \
       texlive-latex-extra \
  && echo "Cleaning up ..." \
+ && rm -rf /tmp/* \
  && apt-get remove -y --purge \
       libxml2-dev \
       libpq-dev \
@@ -140,8 +141,6 @@ RUN apt-prepare \
       libhdf5-dev \
       libpng-dev \
  && apt-cleanup \
- && mkdir -p /usr/local/share/jupyter/kernels/pyspark \
- && cp -r /src/config/pyspark_kernel/* /usr/local/share/jupyter/kernels/pyspark \
  && mv /bin/bootstrap /bin/bootstrap-spark
 
 # Add the binary files
