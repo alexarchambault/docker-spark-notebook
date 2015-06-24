@@ -127,6 +127,9 @@ RUN apt-prepare \
  && apt-get install -q -y --no-install-recommends \
       texlive \
       texlive-latex-extra \
+ && echo "Installing pySpark Jupyter kernel ..." \
+ && mkdir -p /usr/local/share/jupyter/kernels/pyspark/ \
+ && cp -r /src/config/pyspark_kernel/* /usr/local/share/jupyter/kernels/pyspark/ \
  && echo "Cleaning up ..." \
  && rm -rf /tmp/* \
  && apt-get remove -y --purge \
