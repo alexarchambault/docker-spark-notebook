@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+# Run the bootstrap for hadoop
+if [[ $1 == "-noformat" ]]; then
+  bootstrap-spark -noformat
+  shift
+else
+  bootstrap-spark
+fi
+
 # Set the environment variables (defaults)
 NOTEBOOKS_DIR=/notebooks
 PYSPARK_DRIVER_MEMORY=${PYSPARK_DRIVER_MEMORY:-1g}
@@ -13,7 +21,6 @@ cat /src/config/kernels/pyspark/kernel.json.template \
   | sed "s|{{PYSPARK_EXECUTOR_MEMORY}}|${PYSPARK_EXECUTOR_MEMORY}|g" \
   | sed "s|{{PYSPARK_EXECUTOR_CORES}}|${PYSPARK_EXECUTOR_CORES}|g" \
    > /usr/local/share/jupyter/kernels/pyspark/kernel.json
-
 
 
 # Save the environmnet variables in case of an attach to the container with new tty

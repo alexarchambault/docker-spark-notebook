@@ -127,37 +127,6 @@ RUN apt-prepare \
  && apt-get install -q -y --no-install-recommends \
       texlive \
       texlive-latex-extra \
- && echo "Installing R ..." \
- && echo "deb http://cran.rstudio.com/bin/linux/debian wheezy-cran3/" >> /etc/apt/sources.list \
- && apt-key adv --keyserver keys.gnupg.net --recv-key 381BA480 \
- && apt-get install -q -y \
-      r-base \
-      r-base-dev \
-      libreadline-dev \
-      r-cran-boot \
-      r-cran-class \
-      r-cran-cluster \
-      r-cran-codetools \
-      r-cran-foreign \
-      r-cran-kernsmooth \
-      r-cran-lattice \
-      r-cran-mass \
-      r-cran-matrix \
-      r-cran-mgcv \
-      r-cran-nlme \
-      r-cran-nnet \
-      r-cran-rpart \
-      r-cran-spatial \
-      r-cran-survival \
- && apt-get autoremove -y \
- && apt-get clean -y \
- && curl https://raw.githubusercontent.com/zeromq/cppzmq/master/zmq.hpp -o /usr/local/include/zmq.hpp \
- && echo 'options(repos=structure(c(CRAN="http://cran.rstudio.com")))' >> /etc/R/Rprofile.site \
- && echo "install.packages(c('ggplot2', 'XML', 'plyr', 'randomForest', 'Hmisc', 'stringr', 'RColorBrewer', 'reshape', 'reshape2'))" | R --no-save \
- && echo "install.packages(c('RCurl', 'devtools'))" | R --no-save \
- && echo "install.packages(c('rzmq','repr','IRkernel','IRdisplay'), repos = c('http://irkernel.github.io/', getOption('repos')), type = 'source'); IRkernel::installspec()" | R --no-save \
- && echo "Installing the kernels ..." \
- && cp -r /src/config/kernels/* /usr/local/share/jupyter/kernels/ \
  && echo "Cleaning up ..." \
  && rm -rf /tmp/* \
  && apt-get remove -y --purge \
@@ -180,3 +149,11 @@ ADD bin /bin/
 # expose the relevant ports
 EXPOSE \
   8888
+
+# Run bootstrap on container launch
+ENTRYPOINT \
+  ["bootstrap"]
+
+# Default command
+CMD \
+  ["-d"]
