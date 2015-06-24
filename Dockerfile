@@ -38,7 +38,7 @@ RUN apt-prepare \
  && echo "Installing the necessary packages ..." \
  && echo "deb http://http.debian.net/debian wheezy-backports main" >> /etc/apt/sources.list \
  && curl -sL https://deb.nodesource.com/setup_0.12 | bash - \
- && apt-get install -q -y \
+ && apt-get install -q -y --no-install-recommends \
       build-essential \
       gfortran \
       git-core \
