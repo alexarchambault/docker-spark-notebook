@@ -152,8 +152,6 @@ RUN apt-prepare \
  && apt-get autoremove -y \
  && apt-get clean -y \
  && curl https://raw.githubusercontent.com/zeromq/cppzmq/master/zmq.hpp -o /usr/local/include/zmq.hpp \
- && pip3 install \
-      rpy2 \
  && echo 'options(repos=structure(c(CRAN="http://cran.rstudio.com")))' >> /etc/R/Rprofile.site \
  && echo "install.packages(c('ggplot2', 'XML', 'plyr', 'randomForest', 'Hmisc', 'stringr', 'RColorBrewer', 'reshape', 'reshape2'))" | R --no-save \
  && echo "install.packages(c('RCurl', 'devtools'))" | R --no-save \
