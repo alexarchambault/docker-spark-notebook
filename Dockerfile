@@ -148,7 +148,7 @@ RUN apt-prepare \
       r-cran-nnet \
       r-cran-rpart \
       r-cran-spatial \
-      r-cran-survival
+      r-cran-survival \
  && curl https://raw.githubusercontent.com/zeromq/cppzmq/master/zmq.hpp -o /usr/local/include/zmq.hpp \
  && pip3 install \
       rpy2 \
@@ -157,7 +157,7 @@ RUN apt-prepare \
  && echo "install.packages(c('RCurl', 'devtools'))" | R --no-save \
  && echo "install.packages(c('rzmq','repr','IRkernel','IRdisplay'), repos = c('http://irkernel.github.io/', getOption('repos')), type = 'source'); IRkernel::installspec()" | R --no-save \
  && echo "Installing the kernels ..." \
- cp -r /src/config/kernels/* /usr/local/share/jupyter/kernels/ \
+ && cp -r /src/config/kernels/* /usr/local/share/jupyter/kernels/ \
  && echo "Cleaning up ..." \
  && rm -rf /tmp/* \
  && apt-get remove -y --purge \
