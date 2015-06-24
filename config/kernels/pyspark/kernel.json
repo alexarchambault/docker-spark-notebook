@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "/usr/local/bin/python3",
+    "-m",
+    "ipykernel",
+    "-f",
+    "{connection_file}"
+  ],
+  "language": "python",
+  "display_name": "Spark 1.4 (pySpark)",
+  "env": {
+    "SPARK_HOME": "/opt/spark",
+    "PYTHONPATH": "/opt/spark/python/:/opt/spark/python/lib/py4j-0.8.2.1-src.zip",
+    "PYTHONSTARTUP": "/opt/spark/python/pyspark/shell.py",
+    "PYSPARK_SUBMIT_ARGS": "--master yarn-client --driver-memory 1g --executor-memory 1g --executor-cores 1 pyspark-shell"
+  }
+}
