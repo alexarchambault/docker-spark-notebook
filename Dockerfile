@@ -18,7 +18,7 @@
 
 # Pull base image
 FROM \
-  docxs/java:8
+  docxs/spark:1.4
 
 # Maintainer details
 MAINTAINER \
