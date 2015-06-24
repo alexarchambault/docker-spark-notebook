@@ -102,7 +102,7 @@ RUN apt-prepare \
  && cp /src/config/scipy-site.cfg /tmp/scipy/site.cfg \
  && ldconfig && export LD_LIBRARY_PATH=/opt/OpenBLAS/lib/ \
  && python3 setup.py install \
- && "Installing additional python packages ..." \
+ && echo "Installing additional python packages ..." \
  && pip3 install \
       pandas \
       scikit-learn \
