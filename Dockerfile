@@ -149,6 +149,8 @@ RUN apt-prepare \
       r-cran-rpart \
       r-cran-spatial \
       r-cran-survival \
+ && apt-get autoremove -y \
+ && apt-get clean -y \
  && curl https://raw.githubusercontent.com/zeromq/cppzmq/master/zmq.hpp -o /usr/local/include/zmq.hpp \
  && pip3 install \
       rpy2 \

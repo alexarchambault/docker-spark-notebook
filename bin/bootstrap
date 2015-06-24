@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e
+
+# Set the environment variables (defaults)
+NOTEBOOKS_DIR=/notebooks
+PYSPARK_DRIVER_MEMORY=${PYSPARK_DRIVER_MEMORY:-1g}
+PYSPARK_EXECUTOR_MEMORY=${PYSPARK_EXECUTOR_MEMORY:-1g}
+PYSPARK_EXECUTOR_CORES=${PYSPARK_EXECUTOR_CORES:-1}
+
+# Configure the pySpark kernel.json
+cat /src/config/kernels/pyspark/kernel.json.template \
+  | sed "s|{{PYSPARK_DRIVER_MEMORY}}|${PYSPARK_DRIVER_MEMORY}|g" \
+  | sed "s|{{PYSPARK_EXECUTOR_MEMORY}}|${PYSPARK_EXECUTOR_MEMORY}|g" \
+  | sed "s|{{PYSPARK_EXECUTOR_CORES}}|${PYSPARK_EXECUTOR_CORES}|g" \
+   > /usr/local/share/jupyter/kernels/pyspark/kernel.json
+
+
+
+# Save the environmnet variables in case of an attach to the container with new tty
+env |  awk '{split($0,a,"\n"); print "export " a[1]}' > /etc/environment
+echo "export PATH=$PATH" >> /etc/environment
+
+if [[ $1 == "-d" ]]; then
+  jupyter notebook --ip=0.0.0.0 --no-browser --port=8888 --notebook-dir=${NOTEBOOKS_DIR}
+fi
+
+if [[ $1 == "-bash" ]]; then
+  /bin/bash
+fi
