@@ -37,8 +37,6 @@ ADD config /src/config
 RUN apt-prepare \
  && echo "Installing the necessary packages ..." \
  && echo "deb http://http.debian.net/debian wheezy-backports main" >> /etc/apt/sources.list \
- && echo "deb http://cran.rstudio.com/bin/linux/debian wheezy-cran3/" >> /etc/apt/sources.list \
- && apt-key adv --keyserver keys.gnupg.net --recv-key 381BA480 \
  && curl -sL https://deb.nodesource.com/setup_0.12 | bash - \
  && apt-get install -q -y \
       build-essential \
@@ -130,6 +128,8 @@ RUN apt-prepare \
       texlive \
       texlive-latex-extra \
  && echo "Installing R ..." \
+ && echo "deb http://cran.rstudio.com/bin/linux/debian wheezy-cran3/" >> /etc/apt/sources.list \
+ && apt-key adv --keyserver keys.gnupg.net --recv-key 381BA480 \
  && apt-get install -q -y \
       r-base \
       r-base-dev \
