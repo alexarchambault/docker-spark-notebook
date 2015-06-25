@@ -55,7 +55,7 @@ RUN apt-prepare \
  && echo 'options(repos=structure(c(CRAN="http://cran.rstudio.com")))' >> /etc/R/Rprofile.site \
  && echo "install.packages(c('ggplot2', 'XML', 'plyr', 'randomForest', 'Hmisc', 'stringr', 'RColorBrewer', 'reshape', 'reshape2'))" | R --no-save \
  && echo "install.packages(c('RCurl', 'devtools'))" | R --no-save \
- && echo "install.packages(c('rzmq','repr','IRkernel','IRdisplay'), repos = c('http://irkernel.github.io/', getOption('repos')), type = 'source'); IRkernel::installspec()" | R --no-save
+ && echo "install.packages(c('rzmq','repr','IRkernel','IRdisplay'), repos = c('http://irkernel.github.io/', getOption('repos')), type = 'source'); IRkernel::installspec()" | R --no-save \
  && mkdir -p /usr/local/share/jupyter/kernels/ir/ \
  && cp -r /src/config/ir_kernel/* /usr/local/share/jupyter/kernels/ir/ \
  && apt-cleanup
