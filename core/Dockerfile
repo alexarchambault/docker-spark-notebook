@@ -114,6 +114,7 @@ RUN apt-prepare \
       sympy \
       patsy \
       statsmodels \
+      husl \
       ggplot \
       vincent \
       dill \
