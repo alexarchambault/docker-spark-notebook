@@ -18,7 +18,7 @@
 
 # Pull base image
 FROM \
-  docxs/spark-notebook:core
+  docxs/spark-notebook:latest
 
 # Maintainer details
 MAINTAINER \
