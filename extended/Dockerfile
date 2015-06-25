@@ -32,7 +32,7 @@ RUN apt-prepare \
  && echo "Installing R support ..." \
  && echo "deb http://cran.rstudio.com/bin/linux/debian wheezy-cran3/" >> /etc/apt/sources.list \
  && apt-key adv --keyserver keys.gnupg.net --recv-key 381BA480 \
- && apt-get update
+ && apt-get update \
  && apt-get install -q -y \
       r-base \
       r-base-dev \
