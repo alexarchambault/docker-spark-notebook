@@ -1,5 +1,5 @@
 ########################################################################
-# Dockerfile for Jupyter notebooks with python, pySpark & R support
+# Dockerfile for Jupyter notebooks with python 3 & pySpark support
 #
 #                    ##        .
 #              ## ## ##       ==
@@ -10,9 +10,9 @@
 #         \    \        __/
 #          \____\______/
 #
-# Component:    spark-notebook
+# Component:    Jupyter with python 3 and pySpark
 # Author:       pjan vandaele <pjan@pjan.io>
-# Scm url:      https://github.com/docxs/docker-cassandra
+# Scm url:      https://github.com/docxs/docker-spark-notebook
 # License:      MIT
 ########################################################################
 
@@ -133,6 +133,12 @@ RUN apt-prepare \
  && echo "Installing the bootstrap script ..." \
  && mv /bin/bootstrap /bin/bootstrap-spark \
  && echo "Cleaning up ..." \
+ && apt-get remove -q -y \
+      libxml2-dev \
+      libpq-dev \
+      libssl-dev \
+      zlib1g-dev \
+      libsqlite3-dev \
  && apt-cleanup
 
 # Add the binary files
