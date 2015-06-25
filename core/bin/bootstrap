@@ -29,6 +29,7 @@ echo "export PATH=$PATH" >> /etc/environment
 
 if [[ $1 == "-d" ]]; then
   cd ${NOTEBOOKS_DIR}
+  export LD_LIBRARY_PATH=/opt/OpenBLAS/
   jupyter notebook --ip=0.0.0.0 --no-browser --port=8888 --notebook-dir=${NOTEBOOKS_DIR}
 fi
 
